@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Worker Management</title>
+    <meta name="description" content="Worker Management Dashboard for Smart Waste Monitoring System">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h2>Eco<span>Waste</span></h2>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="analytics.html"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="workers.html"><i class="fa-solid fa-user-group"></i> Workers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+                <li class="nav-item logout">
+                    <a href="login.html" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=10b981&color=fff" alt="User Avatar"
+                    class="avatar">
+                <div class="user-info">
+                    <p class="name">John Doe</p>
+                    <p class="role">Supervisor</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="greeting">
+                    <h1>Worker Management</h1>
+                    <p>Manage fleet details, track activity, and view the points leaderboard.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="worker-search" placeholder="Search workers...">
+                    </div>
+                </div>
+            </header>
+
+            <div class="workers-layout">
+                <!-- Left Main Col: Roster -->
+                <div class="roster-section">
+                    <div class="section-header">
+                        <h2>Active Workers List</h2>
+                        <button class="btn btn-primary" style="padding: 8px 12px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), #059669); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(16, 185, 129, 0.5)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.4)';" onclick="document.getElementById('add-worker-modal').classList.add('show')"><i
+                                class="fa-solid fa-plus"></i> Add Worker</button>
+                    </div>
+
+                    <div class="worker-table-container">
+                        <table class="worker-table">
+                            <thead>
+                                <tr>
+                                    <th>Worker Info</th>
+                                    <th>Status</th>
+                                    <th>Total Collections</th>
+                                    <th>Total Points</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Sam Smith</h4>
+                                                <span>#EMP-0142</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active-status">Active</span></td>
+                                    <td>86</td>
+                                    <td><span class="points">2,150 pts</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="action-btn delete"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Raj+Patel&background=f59e0b&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Raj Patel</h4>
+                                                <span>#EMP-0188</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge break-status">On Break</span></td>
+                                    <td>64</td>
+                                    <td><span class="points">1,620 pts</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="action-btn delete"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Mike+Chen&background=10b981&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Mike Chen</h4>
+                                                <span>#EMP-0092</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge active-status">Active</span></td>
+                                    <td>73</td>
+                                    <td><span class="points">1,840 pts</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="action-btn delete"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Luis+Gomez&background=6b7280&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Luis Gomez</h4>
+                                                <span>#EMP-0211</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="status-badge offline-status">Offline</span></td>
+                                    <td>39</td>
+                                    <td><span class="points">980 pts</span></td>
+                                    <td>
+                                        <button class="action-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button class="action-btn delete"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Col: Gamification -->
+                <div class="side-widgets">
+                    <!-- Leaderboard -->
+                    <div class="widget leaderboard-widget">
+                        <div class="widget-header">
+                            <h3><i class="fa-solid fa-ranking-star" style="color: var(--primary);"></i> Leaderboard</h3>
+                            <span class="badge" style="background: var(--paper);">This Week</span>
+                        </div>
+
+                        <div class="podium">
+                            <div class="podium-place second">
+                                <img src="https://ui-avatars.com/api/?name=Mike+Chen&background=10b981&color=fff"
+                                    class="avatar-md">
+                                <div class="rank-badge silver">2</div>
+                                <h4>Mike Chen</h4>
+                                <p>1,840 pts</p>
+                            </div>
+                            <div class="podium-place first">
+                                <i class="fa-solid fa-crown crown-icon"></i>
+                                <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff"
+                                    class="avatar-lg">
+                                <div class="rank-badge gold">1</div>
+                                <h4>Sam Smith</h4>
+                                <p>2,150 pts</p>
+                            </div>
+                            <div class="podium-place third">
+                                <img src="https://ui-avatars.com/api/?name=Raj+Patel&background=f59e0b&color=fff"
+                                    class="avatar-md">
+                                <div class="rank-badge bronze">3</div>
+                                <h4>Raj Patel</h4>
+                                <p>1,620 pts</p>
+                            </div>
+                        </div>
+
+                        <ul class="leaderboard-list">
+                            <li>
+                                <span class="rank-num">4</span>
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=10b981&color=fff"
+                                    class="avatar-xs">
+                                <div class="lb-details">
+                                    <p class="name">John Doe (You)</p>
+                                </div>
+                                <span class="lb-points">1,250</span>
+                            </li>
+                            <li>
+                                <span class="rank-num">5</span>
+                                <img src="https://ui-avatars.com/api/?name=Luis+Gomez&background=6b7280&color=fff"
+                                    class="avatar-xs">
+                                <div class="lb-details">
+                                    <p class="name">Luis Gomez</p>
+                                </div>
+                                <span class="lb-points">980</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Worker Modal -->
+    <div class="modal-overlay" id="add-worker-modal">
+        <div class="modal-content" style="max-width: 360px;">
+            <div class="modal-header" style="padding: 14px 18px;">
+                <h2 style="font-size: 1.05rem;"><i class="fa-solid fa-user-plus" style="color: var(--primary); margin-right: 8px;"></i> Add New Worker</h2>
+                <button class="close-modal" onclick="document.getElementById('add-worker-modal').classList.remove('show')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" style="padding: 16px 18px;">
+                <form id="add-worker-form">
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; font-weight: 600; font-size: 0.82rem; margin-bottom: 4px;">Full Name</label>
+                        <input type="text" id="new-worker-name" placeholder="e.g. Jane Doe" required style="width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.82rem; background: var(--bg-color); color: var(--text-main); outline: none; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; font-weight: 600; font-size: 0.82rem; margin-bottom: 4px;">Employee ID</label>
+                        <input type="text" id="new-worker-id" placeholder="e.g. EMP-0300" required style="width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.82rem; background: var(--bg-color); color: var(--text-main); outline: none; box-sizing: border-box;">
+                    </div>
+                    <div style="margin-bottom: 12px;">
+                        <label style="display: block; font-weight: 600; font-size: 0.82rem; margin-bottom: 4px;">Status</label>
+                        <select id="new-worker-status" style="width: 100%; padding: 8px 10px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.82rem; background: var(--bg-color); color: var(--text-main); outline: none; box-sizing: border-box;">
+                            <option value="Active">Active</option>
+                            <option value="On Break">On Break</option>
+                            <option value="Offline">Offline</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" style="padding: 14px 18px; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; gap: 10px;">
+                <button class="btn btn-outline" style="max-width: fit-content; padding: 8px 14px; font-size: 0.82rem;" onclick="document.getElementById('add-worker-modal').classList.remove('show')">Cancel</button>
+                <button class="btn btn-primary" style="max-width: fit-content; padding: 8px 18px; font-size: 0.82rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), #059669); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" onclick="addNewWorker()">Add Worker</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Worker search functionality
+        const workerSearch = document.getElementById('worker-search');
+        if (workerSearch) {
+            workerSearch.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const rows = document.querySelectorAll('.worker-table tbody tr');
+                rows.forEach(row => {
+                    const name = row.querySelector('h4') ? row.querySelector('h4').textContent.toLowerCase() : '';
+                    const empId = row.querySelector('span') ? row.querySelector('span').textContent.toLowerCase() : '';
+                    const status = row.querySelector('.status-badge') ? row.querySelector('.status-badge').textContent.toLowerCase() : '';
+                    if (name.includes(term) || empId.includes(term) || status.includes(term)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Add new worker functionality
+        function addNewWorker() {
+            const name = document.getElementById('new-worker-name').value.trim();
+            const empId = document.getElementById('new-worker-id').value.trim();
+            const status = document.getElementById('new-worker-status').value;
+
+            if (!name || !empId) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Determine status class
+            let statusClass = 'active-status';
+            if (status === 'On Break') statusClass = 'break-status';
+            if (status === 'Offline') statusClass = 'offline-status';
+
+            // Generate avatar color
+            const colors = ['3b82f6', 'f59e0b', '10b981', 'ef4444', '8b5cf6', 'ec4899'];
+            const randColor = colors[Math.floor(Math.random() * colors.length)];
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${randColor}&color=fff`;
+
+            // Create new row
+            const tbody = document.querySelector('.worker-table tbody');
+            const newRow = document.createElement('tr');
+            newRow.style.opacity = '0';
+            newRow.style.transition = 'opacity 0.4s ease';
+            newRow.innerHTML = `
+                <td>
+                    <div class="table-user">
+                        <img src="${avatarUrl}" class="avatar-sm">
+                        <div>
+                            <h4>${name}</h4>
+                            <span>#${empId}</span>
+                        </div>
+                    </div>
+                </td>
+                <td><span class="status-badge ${statusClass}">${status}</span></td>
+                <td>0</td>
+                <td><span class="points">0 pts</span></td>
+                <td>
+                    <button class="action-btn"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="action-btn delete" onclick="this.closest('tr').remove()"><i class="fa-solid fa-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(newRow);
+
+            // Animate in
+            setTimeout(() => { newRow.style.opacity = '1'; }, 50);
+
+            // Reset form and close modal
+            document.getElementById('new-worker-name').value = '';
+            document.getElementById('new-worker-id').value = '';
+            document.getElementById('new-worker-status').value = 'Active';
+            document.getElementById('add-worker-modal').classList.remove('show');
+        }
+    </script>
+</body>
+
+</html>

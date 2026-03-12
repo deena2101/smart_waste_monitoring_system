@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Worker Dashboard</title>
+    <meta name="description" content="Dashboard for Smart Waste Monitoring System">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h2>Eco<span>Waste</span></h2>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="worker_dashboard.html"><i class="fa-solid fa-border-all"></i> My Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a href="worker_points.html"><i class="fa-solid fa-medal"></i> Points</a>
+                </li>
+                <li class="nav-item">
+                    <a href="worker_leaderboard.html"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="worker_history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                </li>
+                <li class="nav-item logout">
+                    <a href="login.html" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff" alt="User Avatar"
+                    class="avatar">
+                <div class="user-info">
+                    <p class="name">Sam Smith</p>
+                    <p class="role">Field Worker</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="greeting">
+                    <h1>Worker Dashboard</h1>
+                    <p>Welcome back, Sam! Here are the active bins ready for collection.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="bin-search" placeholder="Search bins...">
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Left Column: Bins -->
+                <div class="bins-container">
+                    <div class="section-header">
+                        <h2>Live Bin Status</h2>
+                    </div>
+
+                    <div class="cards-grid">
+                        <!-- Plastic Bin -->
+                        <div class="bin-card plastic">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-solid fa-bottle-water"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Plastic</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge full">Full</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-plastic">92%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline" onclick="claimBin(this)"><i
+                                        class="fa-solid fa-hand-holding-hand"></i> Claim Bin</button>
+                                <button class="btn btn-primary bg-plastic" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i> Update</button>
+                            </div>
+                        </div>
+
+                        <!-- Organic Bin -->
+                        <div class="bin-card organic">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-solid fa-apple-whole"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Organic</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge empty">Empty</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-organic">15%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 15%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline" onclick="claimBin(this)"><i
+                                        class="fa-solid fa-hand-holding-hand"></i> Claim Bin</button>
+                                <button class="btn btn-primary bg-organic" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i> Update</button>
+                            </div>
+                        </div>
+
+                        <!-- Paper Bin -->
+                        <div class="bin-card paper">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-regular fa-newspaper"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Paper</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge medium">Medium</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-paper">65%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline" onclick="claimBin(this)"><i
+                                        class="fa-solid fa-hand-holding-hand"></i> Claim Bin</button>
+                                <button class="btn btn-primary bg-paper" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i> Update</button>
+                            </div>
+                        </div>
+
+                        <!-- Unclassified Bin -->
+                        <div class="bin-card unclassified">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Unclassified</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge claimed">Claimed</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-unclassified">80%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline disabled" disabled><i class="fa-solid fa-check"></i>
+                                    Claimed</button>
+                                <button class="btn btn-primary bg-unclassified" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i> Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Stats & Notifications -->
+                <div class="side-widgets">
+                    <!-- Worker Points -->
+                    <div class="widget worker-points">
+                        <div class="widget-header">
+                            <h3>My Points</h3>
+                        </div>
+                        <div class="points-card">
+                            <div class="trophy-icon">
+                                <i class="fa-solid fa-medal"></i>
+                            </div>
+                            <div class="points-info">
+                                <h4>Total Score</h4>
+                                <div class="score">
+                                    <span class="number">2,150</span>
+                                    <span class="trend up"><i class="fa-solid fa-arrow-trend-up"></i> +50 today</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Collection History -->
+                    <div class="widget history-widget">
+                        <div class="widget-header">
+                            <h3>My Recent Activity</h3>
+                        </div>
+                        <ul class="history-list">
+                            <li>
+                                <div class="history-icon bg-plastic-light">
+                                    <i class="fa-solid fa-bottle-water text-plastic"></i>
+                                </div>
+                                <div class="history-details">
+                                    <p class="title">Plastic bin emptied</p>
+                                    <p class="time">1 hour ago</p>
+                                </div>
+                                <span class="points">+25 pts</span>
+                            </li>
+                            <li>
+                                <div class="history-icon bg-paper-light">
+                                    <i class="fa-regular fa-newspaper text-paper"></i>
+                                </div>
+                                <div class="history-details">
+                                    <p class="title">Paper bin claimed</p>
+                                    <p class="time">3 hours ago</p>
+                                </div>
+                                <span class="points">+5 pts</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Bin search functionality
+        const binSearch = document.getElementById('bin-search');
+        if (binSearch) {
+            binSearch.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase().trim();
+                const cards = document.querySelectorAll('.bin-card');
+                cards.forEach(card => {
+                    const text = card.textContent.toLowerCase();
+                    if (!term || text.includes(term)) {
+                        card.style.display = '';
+                        card.style.opacity = '1';
+                    } else {
+                        card.style.display = 'none';
+                        card.style.opacity = '0';
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Leaderboard</title>
+    <meta name="description" content="Worker Leaderboard for Smart Waste Monitoring System">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .leaderboard-container {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .leaderboard-table th {
+            padding: 1rem;
+            color: var(--text-light);
+            font-weight: 500;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .leaderboard-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .leaderboard-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .leaderboard-table tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .rank-1 {
+            background: rgba(251, 191, 36, 0.2);
+            color: #f59e0b;
+        }
+
+        .rank-2 {
+            background: rgba(156, 163, 175, 0.2);
+            color: #6b7280;
+        }
+
+        .rank-3 {
+            background: rgba(180, 83, 9, 0.2);
+            color: #b45309;
+        }
+
+        .rank-other {
+            background: var(--bg-main);
+            color: var(--text-light);
+        }
+
+        .worker-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .worker-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .worker-name {
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0;
+            font-size: 1rem;
+        }
+        
+        .worker-zone {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        .points-val {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+        
+        /* Highlight current user row */
+        .current-user-row {
+            background-color: var(--primary-light) !important;
+            border-radius: 0.5rem;
+        }
+        
+        .current-user-row td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h2>Eco<span>Waste</span></h2>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="worker_dashboard.html"><i class="fa-solid fa-border-all"></i> My Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a href="worker_points.html"><i class="fa-solid fa-medal"></i> Points</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="worker_leaderboard.html"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="worker_history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                </li>
+                <li class="nav-item logout">
+                    <a href="login.html" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff" alt="User Avatar"
+                    class="avatar">
+                <div class="user-info">
+                    <p class="name">Sam Smith</p>
+                    <p class="role">Field Worker</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="greeting">
+                    <h1>Leaderboard</h1>
+                    <p>See how you match up against other workers this month.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-medal" style="color: var(--primary-color);"></i>
+                        <select style="border: none; background: transparent; outline: none; font-family: inherit; color: var(--text-main); font-weight: 500; cursor: pointer; padding-right: 1rem;">
+                            <option value="this-month">This Month</option>
+                            <option value="last-month">Last Month</option>
+                            <option value="all-time">All Time</option>
+                        </select>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <div class="leaderboard-container">
+                    <table class="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">Rank</th>
+                                <th>Worker</th>
+                                <th>Tasks Completed</th>
+                                <th style="text-align: right;">Total Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <span class="rank-badge rank-1"><i class="fa-solid fa-trophy"></i></span>
+                                </td>
+                                <td>
+                                    <div class="worker-info">
+                                        <img src="https://ui-avatars.com/api/?name=Michael+Chen&background=10b981&color=fff" alt="Avatar" class="worker-avatar">
+                                        <div>
+                                            <p class="worker-name">Michael Chen</p>
+                                            <p class="worker-zone">North Zone</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>184</td>
+                                <td style="text-align: right;" class="points-val">2,450</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <span class="rank-badge rank-2">2</span>
+                                </td>
+                                <td>
+                                    <div class="worker-info">
+                                        <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=f59e0b&color=fff" alt="Avatar" class="worker-avatar">
+                                        <div>
+                                            <p class="worker-name">Sarah Johnson</p>
+                                            <p class="worker-zone">East Zone</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>165</td>
+                                <td style="text-align: right;" class="points-val">2,280</td>
+                            </tr>
+                            <tr class="current-user-row">
+                                <td style="text-align: center;">
+                                    <span class="rank-badge rank-3">3</span>
+                                </td>
+                                <td>
+                                    <div class="worker-info">
+                                        <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff" alt="Avatar" class="worker-avatar border-primary" style="border: 2px solid var(--primary-color);">
+                                        <div>
+                                            <p class="worker-name">Sam Smith <span style="font-size: 0.75rem; background: var(--primary-color); color: white; padding: 2px 6px; border-radius: 10px; margin-left: 8px;">You</span></p>
+                                            <p class="worker-zone">Central Zone</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>142</td>
+                                <td style="text-align: right;" class="points-val">2,150</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <span class="rank-badge rank-other">4</span>
+                                </td>
+                                <td>
+                                    <div class="worker-info">
+                                        <img src="https://ui-avatars.com/api/?name=David+Kim&background=8b5cf6&color=fff" alt="Avatar" class="worker-avatar">
+                                        <div>
+                                            <p class="worker-name">David Kim</p>
+                                            <p class="worker-zone">West Zone</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>138</td>
+                                <td style="text-align: right;" class="points-val">1,940</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: center;">
+                                    <span class="rank-badge rank-other">5</span>
+                                </td>
+                                <td>
+                                    <div class="worker-info">
+                                        <img src="https://ui-avatars.com/api/?name=Amanda+Lee&background=ec4899&color=fff" alt="Avatar" class="worker-avatar">
+                                        <div>
+                                            <p class="worker-name">Amanda Lee</p>
+                                            <p class="worker-zone">South Zone</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>125</td>
+                                <td style="text-align: right;" class="points-val">1,820</td>
+                            </tr>
+                             <tr>
+                                <td style="text-align: center;">
+                                    <span class="rank-badge rank-other">6</span>
+                                </td>
+                                <td>
+                                    <div class="worker-info">
+                                        <img src="https://ui-avatars.com/api/?name=Robert+Fox&background=64748b&color=fff" alt="Avatar" class="worker-avatar">
+                                        <div>
+                                            <p class="worker-name">Robert Fox</p>
+                                            <p class="worker-zone">North Zone</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>110</td>
+                                <td style="text-align: right;" class="points-val">1,500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

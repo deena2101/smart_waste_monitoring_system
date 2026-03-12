@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Smart Monitoring Dashboard</title>
+    <meta name="description" content="Dashboard for Smart Waste Monitoring System">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h2>Eco<span>Waste</span></h2>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="analytics.html"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="workers.html"><i class="fa-solid fa-user-group"></i> Workers</a>
+                </li>
+                <li class="nav-item">
+                    <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+                <li class="nav-item logout">
+                    <a href="login.html" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=10b981&color=fff" alt="User Avatar"
+                    class="avatar">
+                <div class="user-info">
+                    <p class="name">John Doe</p>
+                    <p class="role">Supervisor</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="greeting">
+                    <h1>Admin Dashboard</h1>
+                    <p>Welcome back, Supervisor! Here's the current status of waste bins.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="bin-search" placeholder="Search bins...">
+                    </div>
+                    <div style="position: relative;">
+                        <button class="icon-btn unread" id="notification-btn">
+                            <i class="fa-regular fa-bell"></i>
+                        </button>
+                        <!-- Notifications Dropdown -->
+                        <div class="notifications-dropdown" id="notifications-dropdown">
+                            <div class="dropdown-header">
+                                <h3>Notifications</h3>
+                                <span class="badge">2 New</span>
+                            </div>
+                            <div class="dropdown-body">
+                                <div class="alert-card critical">
+                                    <div class="alert-icon">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h4>Bin Critical Alert</h4>
+                                        <p>Plastic bin is 92% full. Immediate collection required.</p>
+                                    </div>
+                                </div>
+                                <div class="alert-card info" onclick="showTripModal()" style="cursor: pointer;">
+                                    <div class="alert-icon">
+                                        <i class="fa-solid fa-leaf"></i>
+                                    </div>
+                                    <div class="alert-content">
+                                        <h4>Trip Saver Alert</h4>
+                                        <p>Combine collections to save a trip. Click to view.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Left Column: Bins -->
+                <div class="bins-container">
+                    <div class="section-header">
+                        <h2>Live Bin Status</h2>
+                        <div class="filter-tabs">
+                            <span class="tab active">All</span>
+                            <span class="tab">Critical</span>
+                            <span class="tab">Claimed</span>
+                        </div>
+                    </div>
+
+                    <div class="cards-grid">
+                        <!-- Plastic Bin -->
+                        <div class="bin-card plastic">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-solid fa-bottle-water"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Plastic</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge full">Full</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-plastic">92%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline" onclick="claimBin(this)"><i
+                                        class="fa-solid fa-hand-holding-hand"></i> Claim Bin</button>
+                                <button class="btn btn-primary bg-plastic" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i> Update
+                                    Collection</button>
+                            </div>
+                        </div>
+
+                        <!-- Organic Bin -->
+                        <div class="bin-card organic">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-solid fa-apple-whole"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Organic</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge empty">Empty</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-organic">15%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 15%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline" onclick="claimBin(this)"><i
+                                        class="fa-solid fa-hand-holding-hand"></i> Claim Bin</button>
+                                <button class="btn btn-primary bg-organic" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i> Update
+                                    Collection</button>
+                            </div>
+                        </div>
+
+                        <!-- Paper Bin -->
+                        <div class="bin-card paper">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-regular fa-newspaper"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Paper</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge medium">Medium</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-paper">65%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline" onclick="claimBin(this)"><i
+                                        class="fa-solid fa-hand-holding-hand"></i> Claim Bin</button>
+                                <button class="btn btn-primary bg-paper" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i> Update
+                                    Collection</button>
+                            </div>
+                        </div>
+
+                        <!-- Unclassified Bin -->
+                        <div class="bin-card unclassified">
+                            <div class="card-header">
+                                <div class="bin-info">
+                                    <div class="icon-wrapper">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </div>
+                                    <div>
+                                        <h3>Unclassified</h3>
+                                    </div>
+                                </div>
+                                <span class="status-badge claimed">Claimed</span>
+                            </div>
+                            <div class="fill-level">
+                                <div class="fill-header">
+                                    <span>Fill Level</span>
+                                    <span class="percentage text-unclassified">80%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-outline disabled" disabled><i class="fa-solid fa-check"></i>
+                                    Claimed</button>
+                                <button class="btn btn-primary bg-unclassified" onclick="updateCollection(this)"><i
+                                        class="fa-solid fa-truck-fast"></i>
+                                    Update Collection</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Stats & Notifications -->
+                <div class="side-widgets">
+                    <!-- System Health -->
+                    <div class="widget system-health-widget">
+                        <div class="widget-header">
+                            <h3>Sensor Status</h3>
+                            <span style="font-size: 0.8rem; color: var(--primary); font-weight: 600;"><i class="fa-solid fa-circle" style="font-size: 0.5rem; vertical-align: middle; margin-right: 4px;"></i>All Online</span>
+                        </div>
+
+                        <!-- Plastic Sensor -->
+                        <div style="display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                            <div class="icon-wrapper" style="width: 40px; height: 40px; border-radius: 10px; background: var(--plastic-light); color: var(--plastic); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 2px;">Plastic — Ultrasonic</p>
+                                <p style="font-size: 0.75rem; color: var(--text-muted);">Last reading: 2 mins ago</p>
+                            </div>
+                            <span style="font-size: 0.7rem; font-weight: 700; color: white; background: var(--primary); padding: 3px 8px; border-radius: 10px;">Active</span>
+                        </div>
+
+                        <!-- Organic Sensor -->
+                        <div style="display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                            <div class="icon-wrapper" style="width: 40px; height: 40px; border-radius: 10px; background: var(--organic-light); color: var(--organic); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                                <i class="fa-solid fa-apple-whole"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 2px;">Organic — Ultrasonic</p>
+                                <p style="font-size: 0.75rem; color: var(--text-muted);">Last reading: 5 mins ago</p>
+                            </div>
+                            <span style="font-size: 0.7rem; font-weight: 700; color: white; background: var(--primary); padding: 3px 8px; border-radius: 10px;">Active</span>
+                        </div>
+
+                        <!-- Paper Sensor -->
+                        <div style="display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border-color);">
+                            <div class="icon-wrapper" style="width: 40px; height: 40px; border-radius: 10px; background: var(--paper-light); color: var(--paper); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                                <i class="fa-solid fa-newspaper"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 2px;">Paper — Ultrasonic</p>
+                                <p style="font-size: 0.75rem; color: var(--text-muted);">Last reading: 1 min ago</p>
+                            </div>
+                            <span style="font-size: 0.7rem; font-weight: 700; color: white; background: var(--primary); padding: 3px 8px; border-radius: 10px;">Active</span>
+                        </div>
+
+                        <!-- Unclassified Sensor -->
+                        <div style="display: flex; align-items: center; gap: 14px; padding: 12px 0;">
+                            <div class="icon-wrapper" style="width: 40px; height: 40px; border-radius: 10px; background: var(--unclassified-light); color: var(--unclassified); display: flex; align-items: center; justify-content: center; font-size: 1.1rem;">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </div>
+                            <div style="flex: 1;">
+                                <p style="font-weight: 600; font-size: 0.9rem; margin-bottom: 2px;">Unclassified — Ultrasonic</p>
+                                <p style="font-size: 0.75rem; color: var(--text-muted);">Last reading: 3 mins ago</p>
+                            </div>
+                            <span style="font-size: 0.7rem; font-weight: 700; color: white; background: var(--primary); padding: 3px 8px; border-radius: 10px;">Active</span>
+                        </div>
+                    </div>
+
+                    <!-- Collection History -->
+                    <div class="widget history-widget">
+                        <div class="widget-header">
+                            <h3>Collection History</h3>
+                            <a href="history.html" class="view-all">View All</a>
+                        </div>
+                        <ul class="history-list">
+                            <li>
+                                <div class="history-icon bg-organic-light">
+                                    <i class="fa-solid fa-apple-whole text-organic"></i>
+                                </div>
+                                <div class="history-details">
+                                    <p class="title">Organic waste collected</p>
+                                    <p class="time">10 mins ago</p>
+                                </div>
+                                <span class="points">+20 pts</span>
+                            </li>
+                            <li>
+                                <div class="history-icon bg-plastic-light">
+                                    <i class="fa-solid fa-bottle-water text-plastic"></i>
+                                </div>
+                                <div class="history-details">
+                                    <p class="title">Plastic bin emptied</p>
+                                    <p class="time">1 hour ago</p>
+                                </div>
+                                <span class="points">+15 pts</span>
+                            </li>
+                            <li>
+                                <div class="history-icon bg-paper-light">
+                                    <i class="fa-regular fa-newspaper text-paper"></i>
+                                </div>
+                                <div class="history-details">
+                                    <p class="title">Paper collection completed</p>
+                                    <p class="time">3 hours ago</p>
+                                </div>
+                                <span class="points">+10 pts</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="widget notifications-widget">
+                        <div class="widget-header">
+                            <h3>Notifications</h3>
+                            <span class="badge">2 New</span>
+                        </div>
+                        <div class="alert-card critical">
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Bin Critical Alert</h4>
+                                <p>Plastic bin is 92% full. Immediate collection required.</p>
+                            </div>
+                        </div>
+                        <div class="alert-card info" onclick="showTripModal()" style="cursor: pointer;">
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-leaf"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Trip Saver Alert</h4>
+                                <p>Combine collections to save a trip. Click to view.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Trip Saver Modal -->
+    <div class="modal-overlay" id="route-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-leaf" style="color: var(--primary); margin-right: 10px;"></i> Trip Saver Strategy</h2>
+                <button class="close-modal" onclick="closeTripModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body">
+                <p>The <strong>Plastic</strong> bin is critically full and needs immediate attention. However, instead of making a single trip just for that bin, a combined collection is recommended.</p>
+                <div class="route-map-placeholder" style="margin-top: 20px; text-align: center; background: var(--bg-color); border-radius: var(--radius-md); padding: 40px; border: 1px dashed var(--border-color);">
+                    <i class="fa-solid fa-recycle" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 15px;"></i>
+                    <p style="color: var(--text-muted); margin-bottom: 20px;">Recommended Collection Action</p>
+                    <div style="text-align: left; background: var(--card-bg); padding: 20px; border-radius: var(--radius-sm); display: inline-block;">
+                        <p style="margin-bottom: 12px; font-weight: 600;"><i class="fa-solid fa-bottle-water" style="color: var(--plastic); width: 30px;"></i> Empty Plastic Bin <span class="badge" style="background:#dc2626; float:right;">92% Full</span></p>
+                        <p style="margin-bottom: 12px; font-weight: 600;"><i class="fa-solid fa-apple-whole" style="color: var(--organic); width: 30px;"></i> Empty Organic Bin <span class="badge" style="background:#f59e0b; float:right;">78% Full</span></p>
+                        <p style="font-weight: 600;"><i class="fa-solid fa-newspaper" style="color: var(--paper); width: 30px;"></i> Empty Paper Bin <span class="badge" style="background:#f59e0b; float:right;">73% Full</span></p>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px;">Estimated savings: 1 Extra Trip avoided tomorrow.</p>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; align-items: center; gap: 15px;">
+                <button class="btn btn-outline" style="max-width: fit-content; padding: 10px 20px;" onclick="closeTripModal()">Dismiss</button>
+                <button class="btn btn-primary" style="max-width: fit-content; padding: 12px 28px; font-size: 1.05rem; font-weight: 700; background: linear-gradient(135deg, var(--primary), #059669); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(16, 185, 129, 0.5)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.4)';" onclick="acceptTrip(this)">Accept Strategy</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - History</title>
+    <meta name="description" content="Worker History for Smart Waste Monitoring System">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .history-container {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            padding: 2rem;
+        }
+
+        .history-filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            color: var(--text-light);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -2rem;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            z-index: 1;
+        }
+        
+        .timeline-marker.bg-plastic {
+            background: #eef2ff;
+            color: #4f46e5;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #4f46e5;
+        }
+        
+        .timeline-marker.bg-organic {
+            background: #ecfdf5;
+            color: #10b981;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #10b981;
+        }
+
+        .timeline-marker.bg-paper {
+            background: #fffbeb;
+            color: #d97706;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #d97706;
+        }
+
+        .timeline-marker.bg-unclassified {
+            background: #f1f5f9;
+            color: #64748b;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px #64748b;
+        }
+
+        .timeline-content {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-title {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .history-time {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .history-desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin: 0.5rem 0 0 0;
+        }
+
+        .history-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        .points-earned {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h2>Eco<span>Waste</span></h2>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="worker_dashboard.html"><i class="fa-solid fa-border-all"></i> My Tasks</a>
+                </li>
+                <li class="nav-item">
+                    <a href="worker_points.html"><i class="fa-solid fa-medal"></i> Points</a>
+                </li>
+                <li class="nav-item">
+                    <a href="worker_leaderboard.html"><i class="fa-solid fa-trophy"></i> Leaderboard</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="worker_history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                </li>
+                <li class="nav-item logout">
+                    <a href="login.html" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff" alt="User Avatar"
+                    class="avatar">
+                <div class="user-info">
+                    <p class="name">Sam Smith</p>
+                    <p class="role">Field Worker</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="greeting">
+                    <h1>Activity History</h1>
+                    <p>Review your completed tasks and routes.</p>
+                </div>
+                <div class="header-actions">
+                     <button class="btn btn-outline"><i class="fa-solid fa-download"></i> Download Report</button>
+                </div>
+            </header>
+
+            <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+                <div class="history-container">
+                    
+                    <div class="history-filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Plastic</button>
+                        <button class="filter-btn">Organic</button>
+                        <button class="filter-btn">Paper</button>
+                        <button class="filter-btn">Unclassified</button>
+                    </div>
+
+                    <div class="timeline">
+                        <!-- History Item 1 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-plastic">
+                                <i class="fa-solid fa-bottle-water"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <h3 class="history-title">Emptied Plastic Bin</h3>
+                                    <span class="history-time"><i class="fa-regular fa-clock"></i> Today, 10:45 AM</span>
+                                </div>
+                                <p class="history-desc">Successfully collected and emptied the primary plastic waste bin in the downtown sector.</p>
+                                <div class="history-meta">
+                                    <div class="meta-item">
+                                        <i class="fa-solid fa-weight-scale"></i> 45 kg
+                                    </div>
+                                    <div class="meta-item points-earned">
+                                        <i class="fa-solid fa-star"></i> +25 Points
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- History Item 2 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-paper">
+                                <i class="fa-regular fa-newspaper"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <h3 class="history-title">Claimed Paper Bin for Routine Maintenance</h3>
+                                    <span class="history-time"><i class="fa-regular fa-clock"></i> Today, 08:30 AM</span>
+                                </div>
+                                <p class="history-desc">Assigned task to collect paper waste bin that was reported full prematurely.</p>
+                                <div class="history-meta">
+                                    <div class="meta-item points-earned">
+                                        <i class="fa-solid fa-star"></i> +5 Points
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- History Item 3 -->
+                        <div class="timeline-item">
+                            <div class="timeline-marker bg-organic">
+                                <i class="fa-solid fa-apple-whole"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <h3 class="history-title">Organic Waste Weekly Collection</h3>
+                                    <span class="history-time"><i class="fa-regular fa-clock"></i> Yesterday, 04:15 PM</span>
+                                </div>
+                                <p class="history-desc">Completed the routine organic waste pickup for the designated residential area.</p>
+                                <div class="history-meta">
+                                     <div class="meta-item">
+                                        <i class="fa-solid fa-weight-scale"></i> 120 kg
+                                    </div>
+                                    <div class="meta-item points-earned">
+                                        <i class="fa-solid fa-star"></i> +50 Points
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                         <!-- History Item 4 -->
+                         <div class="timeline-item">
+                            <div class="timeline-marker bg-unclassified">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-header">
+                                    <h3 class="history-title">Reported Unclassified Bin Damage</h3>
+                                    <span class="history-time"><i class="fa-regular fa-clock"></i> Oct 24, 11:20 AM</span>
+                                </div>
+                                <p class="history-desc">The bin's lid was damaged. Logged issue for maintenance team to resolve.</p>
+                                <div class="history-meta">
+                                    <div class="meta-item">
+                                        <i class="fa-solid fa-wrench"></i> Maintenance Requested
+                                    </div>
+                                     <div class="meta-item points-earned">
+                                        <i class="fa-solid fa-star"></i> +10 Points
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

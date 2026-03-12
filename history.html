@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWaste - Collection History</title>
+    <meta name="description" content="Full Collection History for Smart Waste Monitoring System">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+                <h2>Eco<span>Waste</span></h2>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html"><i class="fa-solid fa-border-all"></i> Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="analytics.html"><i class="fa-solid fa-chart-pie"></i> Analytics</a>
+                </li>
+                <li class="nav-item">
+                    <a href="workers.html"><i class="fa-solid fa-user-group"></i> Workers</a>
+                </li>
+                <li class="nav-item active">
+                    <a href="history.html"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
+                </li>
+                <li class="nav-item">
+                    <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                </li>
+                <li class="nav-item logout">
+                    <a href="login.html" style="color: #ef4444;"><i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        Logout</a>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <img src="https://ui-avatars.com/api/?name=John+Doe&background=10b981&color=fff" alt="User Avatar"
+                    class="avatar">
+                <div class="user-info">
+                    <p class="name">John Doe</p>
+                    <p class="role">Supervisor</p>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="greeting">
+                    <h1>Collection History</h1>
+                    <p>View comprehensive logs of all completed waste collections.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-bar">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="history-search" placeholder="Search by bin or worker...">
+                    </div>
+                </div>
+            </header>
+
+            <div class="history-page-layout">
+                <div class="history-table-section">
+                    <div class="section-header">
+                        <h2>All Collection Logs</h2>
+                        <div class="filter-tabs">
+                            <span class="tab active">All</span>
+                            <span class="tab">Today</span>
+                            <span class="tab">This Week</span>
+                        </div>
+                    </div>
+
+                    <div class="worker-table-container">
+                        <table class="worker-table history-table">
+                            <thead>
+                                <tr>
+                                    <th>Date & Time</th>
+                                    <th>Waste Category</th>
+                                    <th>Action</th>
+                                    <th>Worker</th>
+                                    <th>Points</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-date="2026-03-11">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>11 Mar 2026</h4>
+                                            <span>10:15 AM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label organic">
+                                            <i class="fa-solid fa-apple-whole"></i> Organic
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Sam Smith</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                                <tr data-date="2026-03-11">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>11 Mar 2026</h4>
+                                            <span>09:42 AM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label plastic">
+                                            <i class="fa-solid fa-bottle-water"></i> Plastic
+                                        </div>
+                                    </td>
+                                    <td>Bin Claimed</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Mike+Chen&background=10b981&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Mike Chen</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+5 pts</span></td>
+                                    <td><span class="status-badge claimed">Pending</span></td>
+                                </tr>
+                                <tr data-date="2026-03-10">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>10 Mar 2026</h4>
+                                            <span>04:20 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label paper">
+                                            <i class="fa-regular fa-newspaper"></i> Paper
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Raj+Patel&background=f59e0b&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Raj Patel</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                                <tr data-date="2026-03-10">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>10 Mar 2026</h4>
+                                            <span>03:15 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label unclassified">
+                                            <i class="fa-solid fa-trash-can"></i> Unclassified
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Sam Smith</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                                <tr data-date="2026-03-09">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>09 Mar 2026</h4>
+                                            <span>02:30 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label plastic">
+                                            <i class="fa-solid fa-bottle-water"></i> Plastic
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Mike+Chen&background=10b981&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Mike Chen</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                                <tr data-date="2026-03-09">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>09 Mar 2026</h4>
+                                            <span>11:10 AM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label organic">
+                                            <i class="fa-solid fa-apple-whole"></i> Organic
+                                        </div>
+                                    </td>
+                                    <td>Bin Claimed</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Raj+Patel&background=f59e0b&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Raj Patel</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+5 pts</span></td>
+                                    <td><span class="status-badge claimed">Pending</span></td>
+                                </tr>
+                                <tr data-date="2026-03-08">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>08 Mar 2026</h4>
+                                            <span>05:45 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label paper">
+                                            <i class="fa-regular fa-newspaper"></i> Paper
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Sam Smith</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                                <tr data-date="2026-03-08">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>08 Mar 2026</h4>
+                                            <span>01:20 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label unclassified">
+                                            <i class="fa-solid fa-trash-can"></i> Unclassified
+                                        </div>
+                                    </td>
+                                    <td>Bin Claimed</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Mike+Chen&background=10b981&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Mike Chen</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+5 pts</span></td>
+                                    <td><span class="status-badge claimed">Pending</span></td>
+                                </tr>
+                                <tr data-date="2026-03-07">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>07 Mar 2026</h4>
+                                            <span>04:00 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label organic">
+                                            <i class="fa-solid fa-apple-whole"></i> Organic
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Raj+Patel&background=f59e0b&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Raj Patel</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                                <tr data-date="2026-03-07">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>07 Mar 2026</h4>
+                                            <span>10:30 AM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label plastic">
+                                            <i class="fa-solid fa-bottle-water"></i> Plastic
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Sam+Smith&background=3b82f6&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Sam Smith</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                                <tr data-date="2026-03-06">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>06 Mar 2026</h4>
+                                            <span>03:50 PM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label paper">
+                                            <i class="fa-regular fa-newspaper"></i> Paper
+                                        </div>
+                                    </td>
+                                    <td>Bin Claimed</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Mike+Chen&background=10b981&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Mike Chen</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+5 pts</span></td>
+                                    <td><span class="status-badge claimed">Pending</span></td>
+                                </tr>
+                                <tr data-date="2026-03-06">
+                                    <td>
+                                        <div class="table-date">
+                                            <h4>06 Mar 2026</h4>
+                                            <span>09:15 AM</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="bin-type-label organic">
+                                            <i class="fa-solid fa-apple-whole"></i> Organic
+                                        </div>
+                                    </td>
+                                    <td>Collection Updated</td>
+                                    <td>
+                                        <div class="table-user">
+                                            <img src="https://ui-avatars.com/api/?name=Raj+Patel&background=f59e0b&color=fff"
+                                                class="avatar-sm">
+                                            <div>
+                                                <h4>Raj Patel</h4>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="points">+25 pts</span></td>
+                                    <td><span class="status-badge empty">Completed</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="btn btn-outline" id="prev-btn" disabled><i class="fa-solid fa-chevron-left"></i>
+                            Previous</button>
+                        <span class="page-info" id="page-info">Page 1 of 3</span>
+                        <button class="btn btn-outline" id="next-btn">Next <i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Pagination
+        const ROWS_PER_PAGE = 4;
+        let currentPage = 1;
+        const allRows = Array.from(document.querySelectorAll('.history-table tbody tr'));
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const pageInfo = document.getElementById('page-info');
+
+        function getVisibleRows() {
+            return allRows.filter(r => r.dataset.filtered !== 'true');
+        }
+
+        function renderPage() {
+            const visible = getVisibleRows();
+            const totalPages = Math.max(1, Math.ceil(visible.length / ROWS_PER_PAGE));
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            // Hide all rows first
+            allRows.forEach(r => r.style.display = 'none');
+
+            // Show only current page rows
+            const start = (currentPage - 1) * ROWS_PER_PAGE;
+            const end = start + ROWS_PER_PAGE;
+            visible.slice(start, end).forEach(r => r.style.display = '');
+
+            // Update buttons
+            prevBtn.disabled = (currentPage <= 1);
+            nextBtn.disabled = (currentPage >= totalPages);
+            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentPage > 1) { currentPage--; renderPage(); }
+        });
+        nextBtn.addEventListener('click', () => {
+            const totalPages = Math.ceil(getVisibleRows().length / ROWS_PER_PAGE);
+            if (currentPage < totalPages) { currentPage++; renderPage(); }
+        });
+
+        // History filter tabs
+        const historyTabs = document.querySelectorAll('.filter-tabs .tab');
+
+        historyTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                historyTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.textContent.trim().toLowerCase();
+                const today = new Date();
+                const todayStr = today.toISOString().split('T')[0];
+
+                const dayOfWeek = today.getDay();
+                const mondayOffset = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                const weekStart = new Date(today);
+                weekStart.setDate(today.getDate() - mondayOffset);
+                const weekStartStr = weekStart.toISOString().split('T')[0];
+
+                allRows.forEach(row => {
+                    const rowDate = row.getAttribute('data-date');
+                    let show = false;
+
+                    if (filter === 'all') show = true;
+                    else if (filter === 'today') show = (rowDate === todayStr);
+                    else if (filter === 'this week') show = (rowDate >= weekStartStr && rowDate <= todayStr);
+
+                    row.dataset.filtered = show ? 'false' : 'true';
+                });
+
+                currentPage = 1;
+                renderPage();
+            });
+        });
+
+        // History search
+        const historySearch = document.getElementById('history-search');
+        if (historySearch) {
+            historySearch.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+
+                if (term.length > 0) {
+                    historyTabs.forEach(t => t.classList.remove('active'));
+                    historyTabs[0].classList.add('active');
+                }
+
+                allRows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.dataset.filtered = text.includes(term) ? 'false' : 'true';
+                });
+
+                currentPage = 1;
+                renderPage();
+            });
+        }
+
+        // Initial render
+        renderPage();
+    </script>
+</body>
+
+</html>
