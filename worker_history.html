@@ -42,6 +42,50 @@
             border-color: var(--primary-color);
         }
 
+        .filter-btn[data-type="plastic"] {
+            color: #4f46e5;
+            border-color: rgba(79, 70, 229, 0.3);
+        }
+        .filter-btn[data-type="plastic"].active,
+        .filter-btn[data-type="plastic"]:hover {
+            background: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+
+        .filter-btn[data-type="organic"] {
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        .filter-btn[data-type="organic"].active,
+        .filter-btn[data-type="organic"]:hover {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .filter-btn[data-type="paper"] {
+            color: #d97706;
+            border-color: rgba(217, 119, 6, 0.3);
+        }
+        .filter-btn[data-type="paper"].active,
+        .filter-btn[data-type="paper"]:hover {
+            background: #d97706;
+            color: white;
+            border-color: #d97706;
+        }
+
+        .filter-btn[data-type="unclassified"] {
+            color: #64748b;
+            border-color: rgba(100, 116, 139, 0.3);
+        }
+        .filter-btn[data-type="unclassified"].active,
+        .filter-btn[data-type="unclassified"]:hover {
+            background: #64748b;
+            color: white;
+            border-color: #64748b;
+        }
+
         .timeline {
             position: relative;
             padding-left: 2rem;
@@ -214,7 +258,7 @@
                     <p>Review your completed tasks and routes.</p>
                 </div>
                 <div class="header-actions">
-                     <button class="btn btn-outline"><i class="fa-solid fa-download"></i> Download Report</button>
+                     <button class="btn btn-outline" onclick="downloadHistoryReport(this)"><i class="fa-solid fa-download"></i> Download Report</button>
                 </div>
             </header>
 
@@ -223,10 +267,10 @@
                     
                     <div class="history-filters">
                         <button class="filter-btn active">All</button>
-                        <button class="filter-btn">Plastic</button>
-                        <button class="filter-btn">Organic</button>
-                        <button class="filter-btn">Paper</button>
-                        <button class="filter-btn">Unclassified</button>
+                        <button class="filter-btn" data-type="plastic">Plastic</button>
+                        <button class="filter-btn" data-type="organic">Organic</button>
+                        <button class="filter-btn" data-type="paper">Paper</button>
+                        <button class="filter-btn" data-type="unclassified">Unclassified</button>
                     </div>
 
                     <div class="timeline">

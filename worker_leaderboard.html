@@ -170,7 +170,7 @@
                 <div class="header-actions">
                     <div class="search-bar">
                         <i class="fa-solid fa-medal" style="color: var(--primary-color);"></i>
-                        <select style="border: none; background: transparent; outline: none; font-family: inherit; color: var(--text-main); font-weight: 500; cursor: pointer; padding-right: 1rem;">
+                        <select id="time-filter" style="border: none; background: transparent; outline: none; font-family: inherit; color: var(--text-main); font-weight: 500; cursor: pointer; padding-right: 1rem;">
                             <option value="this-month">This Month</option>
                             <option value="last-month">Last Month</option>
                             <option value="all-time">All Time</option>
@@ -190,7 +190,7 @@
                                 <th style="text-align: right;">Total Points</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="leaderboard-body">
                             <tr>
                                 <td style="text-align: center;">
                                     <span class="rank-badge rank-1"><i class="fa-solid fa-trophy"></i></span>
