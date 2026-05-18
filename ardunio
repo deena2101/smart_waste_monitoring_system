@@ -1,0 +1,131 @@
+#include <Arduino.h>
+
+// Servo pins
+int servo1 = 3; // Plastic lid
+int servo2 = 4; // Paper lid
+int servo3 = 5; // Organic lid
+int servo4 = 6; // Platform pusher
+
+// Ultrasonic pins
+const int trig1 = 8;  const int echo1 = 9;
+const int trig2 = 10; const int echo2 = 11;
+const int trig3 = 12; const int echo3 = 13;
+const int trig4 = A0; const int echo4 = A1;
+
+long duration;
+float distance;
+String command = "";
+
+// -------- Servo Pulse Function --------
+// Manually sends PWM signals to pins
+void sendPulse(int servoPin, int pulseWidth) {
+  digitalWrite(servoPin, HIGH);
+  delayMicroseconds(pulseWidth);
+  digitalWrite(servoPin, LOW);
+  delayMicroseconds(20000 - pulseWidth);
+}
+
+// -------- Hold Servo Position --------
+// Loops the pulse to give the motor time to physically move
+void holdPosition(int servoPin, int pulseWidth, int durationMs) {
+  int cycles = durationMs / 20; 
+  for (int i = 0; i < cycles; i++) {
+    sendPulse(servoPin, pulseWidth);
+  }
+}
+
+// -------- Ultrasonic Sensor Reader --------
+float readDistance(int trig, int echo) {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  
+  // 40ms timeout (max ~6 meters round trip)
+  duration = pulseIn(echo, HIGH, 40000); 
+  
+  // If timeout occurs (duration=0), return 30.0 (Empty) instead of 0.0
+  if (duration == 0) {
+    distance = 30.0; 
+  } else {
+    distance = duration * 0.0343 / 2;
+  }
+  
+  // Wait 50ms before the next sensor fires to prevent echo collision!
+  delay(50);
+  
+  return distance;
+}
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(servo1, OUTPUT);
+  pinMode(servo2, OUTPUT);
+  pinMode(servo3, OUTPUT);
+  pinMode(servo4, OUTPUT);
+
+  pinMode(trig1, OUTPUT); pinMode(echo1, INPUT);
+  pinMode(trig2, OUTPUT); pinMode(echo2, INPUT);
+  pinMode(trig3, OUTPUT); pinMode(echo3, INPUT);
+  pinMode(trig4, OUTPUT); pinMode(echo4, INPUT);
+
+  // Initial Reset: Set all lids to closed (1000us)
+  holdPosition(servo1, 1000, 500);
+  holdPosition(servo2, 1000, 500);
+  holdPosition(servo3, 1000, 500);
+  holdPosition(servo4, 1000, 500);
+  
+  Serial.println("SYSTEM_READY");
+}
+
+void loop() {
+  // 1. Monitor Fill Levels
+  float d1 = readDistance(trig1, echo1);
+  float d2 = readDistance(trig2, echo2);
+  float d3 = readDistance(trig3, echo3);
+  float d4 = readDistance(trig4, echo4);
+
+  // Send levels to Python/Web Dashboard
+  Serial.print("D1:"); Serial.print(d1);
+  Serial.print(" D2:"); Serial.print(d2);
+  Serial.print(" D3:"); Serial.print(d3);
+  Serial.print(" D4:"); Serial.println(d4);
+
+  // 2. Check for AI Commands
+  if (Serial.available() > 0) {
+    command = Serial.readStringUntil('\n');
+    command.trim();
+
+    if (command == "plastic") {
+      Serial.println("ACTION: Plastic");
+      holdPosition(servo1, 2000, 1500); // 1. Open flap FIRST
+      holdPosition(servo4, 1800, 1500); // 2. Move platform to dump
+      holdPosition(servo4, 1000, 1500); // 3. Reset platform
+      holdPosition(servo1, 1000, 1500); // 4. Close flap
+    }
+    else if (command == "paper") {
+      Serial.println("ACTION: Paper");
+      holdPosition(servo2, 2000, 1500); // 1. Open flap FIRST
+      holdPosition(servo4, 1800, 1500); // 2. Move platform to dump
+      holdPosition(servo4, 1000, 1500); // 3. Reset platform
+      holdPosition(servo2, 1000, 1500); // 4. Close flap
+    }
+    else if (command == "organic") {
+      Serial.println("ACTION: Organic");
+      holdPosition(servo3, 2000, 1500); // 1. Open flap FIRST
+      holdPosition(servo4, 1800, 1500); // 2. Move platform to dump
+      holdPosition(servo4, 1000, 1500); // 3. Reset platform
+      holdPosition(servo3, 1000, 1500); // 4. Close flap
+    }
+    else if (command == "unknown") {
+      Serial.println("ACTION: Unknown");
+      // For unknown, just dump it straight down the slope 
+      // since the unknown bin is always open at the end!
+      holdPosition(servo4, 1800, 1500); 
+      holdPosition(servo4, 1000, 1500);
+    }
+  }
+  delay(100); 
+}
