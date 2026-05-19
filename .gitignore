@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+sensors.db
+.vscode/
+.env
+env/
+.venv/
+venv/
