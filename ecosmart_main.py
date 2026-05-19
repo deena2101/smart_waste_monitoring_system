@@ -47,7 +47,13 @@ stream_app = Flask(__name__)
 
 @stream_app.route('/')
 def index():
-    # Provide a beautiful dashboard with progress bars for the 4 sensors
+    # Serve the original main dashboard (index.html) with all live functionality
+    return send_from_directory('.', 'index.html')
+
+
+@stream_app.route('/sensors')
+def sensors_dashboard():
+    # New sensor monitoring dashboard with live readings and DB history
     return '''
     <!DOCTYPE html>
     <html>
@@ -177,8 +183,8 @@ def index():
 @stream_app.route('/legacy')
 @stream_app.route('/old-dashboard')
 def legacy_dashboard():
-    # Serve the original dashboard UI without replacing the live sensor page.
-    return send_from_directory('.', 'index.html')
+    # Alias to new sensors dashboard
+    return sensors_dashboard()
 
 
 @stream_app.route('/worker-dashboard')
@@ -383,7 +389,8 @@ def run_system(simulate=False):
 
     ESP32_CAM_URL = "http://192.168.255.1/capture"
     print(f"Connecting to ESP32-CAM at {ESP32_CAM_URL}...")
-    print("Live View + Dashboard → http://localhost:5002")
+    print("Main Dashboard → http://localhost:5002")
+    print("Sensor Monitor (new) → http://localhost:5002/sensors")
     print("System Live. Press Ctrl+C to exit.\n")
 
     REQUIRED_STABLE_FRAMES = 4
