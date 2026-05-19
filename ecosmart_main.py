@@ -21,7 +21,7 @@ try:
 except Exception:
     serial = None
     SERIAL_AVAILABLE = False
-from flask import Flask, Response, jsonify, request
+from flask import Flask, Response, jsonify, request, send_from_directory
 
 # ─── Global State ─────────────────────────────────────────────────────────────
 latest_frame_jpg = None
@@ -172,6 +172,18 @@ def index():
     </body>
     </html>
     '''
+
+
+@stream_app.route('/legacy')
+@stream_app.route('/old-dashboard')
+def legacy_dashboard():
+    # Serve the original dashboard UI without replacing the live sensor page.
+    return send_from_directory('.', 'index.html')
+
+
+@stream_app.route('/worker-dashboard')
+def worker_dashboard():
+    return send_from_directory('.', 'worker_dashboard.html')
 
 @stream_app.route('/stream')
 def stream():
